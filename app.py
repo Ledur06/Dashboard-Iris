@@ -133,7 +133,7 @@ input, select {
 
 /* -------- BOUTONS -------- */
 .stButton > button {
-    background-color: #111111;
+    background-color: #E63946;
     color: #ffffff;
     border-radius: 10px;
     padding: 12px 28px;
@@ -143,7 +143,7 @@ input, select {
 }
 
 .stButton > button:hover {
-    background-color: #000000;
+    background-color: #C1121F;
     transform: translateY(-1px);
 }
 
@@ -335,7 +335,7 @@ elif page == "📊 Analyses":
     st.markdown("---")
     
     # Exercice 1 : Effectifs des espèces
-    st.subheader("Effectifs des espèces")
+    st.subheader("Exercice 1 : Effectifs des espèces")
     
     effectifs = df['species'].value_counts()
     
@@ -368,7 +368,7 @@ elif page == "📊 Analyses":
         st.pyplot(fig)
     
     # Exercice 2 : Variables quantitatives
-    st.subheader("Analyse des variables quantitatives")
+    st.subheader("Exercice 2 : Analyse des variables quantitatives")
     
     st.markdown("**Résumé statistique de la longueur du pétale**")
     summary_df = df["petal length (cm)"].describe()
@@ -412,7 +412,7 @@ elif page == "📊 Analyses":
             st.pyplot(fig)
     
     # Exercice 3 : Étude bivariée
-    st.subheader("Étude bivariée")
+    st.subheader("Exercice 3 : Étude bivariée")
     
     col1, col2 = st.columns(2)
     
@@ -445,7 +445,7 @@ elif page == "📊 Analyses":
         st.pyplot(fig)
     
     # Exercice 4 : Boxplots par espèce
-    st.subheader("Analyse par espèce (Boxplots)")
+    st.subheader("Exercice 4 : Analyse par espèce (Boxplots)")
     
     col1, col2 = st.columns(2)
     
@@ -478,7 +478,7 @@ elif page == "📊 Analyses":
         st.pyplot(fig)
     
     # Exercice 5 : Corrélations et nuage de points par espèce
-    st.subheader("Corrélations et nuage de points par espèce")
+    st.subheader("Exercice 5 : Corrélations et nuage de points par espèce")
     
     st.markdown("**Matrice de corrélation des variables quantitatives**")
     correlation = df.drop("species", axis=1).corr()
