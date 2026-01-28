@@ -6,6 +6,8 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
@@ -122,5 +124,165 @@ st.caption(
     "Application développée dans le cadre du TP de classification "
     "des fleurs Iris – Apprentissage automatique."
 )
+
+# ================================
+# VISUALISATIONS ET ANALYSES
+# ================================
+
+st.markdown("---")
+st.header("📊 Analyses et Visualisations")
+
+# Exercice 1 : Effectifs des espèces
+st.subheader("Exercice 1 : Effectifs des espèces")
+
+effectifs = df['species'].value_counts()
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("**Distribution des espèces**")
+    fig, ax = plt.subplots(figsize=(8, 5))
+    effectifs.plot(kind="bar", color=["green", "orange", "blue"], ax=ax)
+    ax.set_title("Histogramme des effectifs des espèces")
+    ax.set_xlabel("Espèces")
+    ax.set_ylabel("Effectif")
+    ax.grid(axis="y")
+    plt.tight_layout()
+    st.pyplot(fig)
+
+with col2:
+    st.markdown("**Répartition en secteurs**")
+    fig, ax = plt.subplots(figsize=(8, 5))
+    effectifs.plot(kind="pie", autopct="%1.1f%%", ax=ax)
+    ax.set_title("Répartition des espèces")
+    ax.set_ylabel("")
+    plt.tight_layout()
+    st.pyplot(fig)
+
+# Exercice 2 : Variables quantitatives
+st.subheader("Exercice 2 : Analyse des variables quantitatives")
+
+st.markdown("**Résumé statistique de la longueur du pétale**")
+st.write(df["petal length (cm)"].describe())
+
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.hist(df["petal length (cm)"], bins=20, edgecolor="black", color="skyblue")
+ax.set_title("Histogramme de la longueur des pétales")
+ax.set_xlabel("Longueur du pétale (cm)")
+ax.set_ylabel("Effectif")
+ax.grid(axis="y", alpha=0.3)
+plt.tight_layout()
+st.pyplot(fig)
+
+st.markdown("**Histogrammes des autres variables quantitatives**")
+
+variables = [
+    "petal width (cm)",
+    "sepal length (cm)",
+    "sepal width (cm)"
+]
+
+cols = st.columns(3)
+for idx, var in enumerate(variables):
+    with cols[idx]:
+        fig, ax = plt.subplots(figsize=(7, 4))
+        ax.hist(df[var], bins=20, edgecolor="black", color="lightcoral")
+        ax.set_title(f"Histogramme de {var}")
+        ax.set_xlabel(var)
+        ax.set_ylabel("Effectif")
+        ax.grid(axis="y", alpha=0.3)
+        plt.tight_layout()
+        st.pyplot(fig)
+
+# Exercice 3 : Étude bivariée
+st.subheader("Exercice 3 : Étude bivariée (corrélations entre variables)")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("**Pétale : Longueur vs Largeur**")
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.scatter(df["petal length (cm)"], df["petal width (cm)"], alpha=0.6, s=100)
+    ax.set_title("Relation : longueur vs largeur du pétale")
+    ax.set_xlabel("Longueur du pétale (cm)")
+    ax.set_ylabel("Largeur du pétale (cm)")
+    ax.grid(alpha=0.3)
+    plt.tight_layout()
+    st.pyplot(fig)
+
+with col2:
+    st.markdown("**Sépale : Longueur vs Largeur**")
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.scatter(df["sepal length (cm)"], df["sepal width (cm)"], alpha=0.6, s=100, color="green")
+    ax.set_title("Relation : longueur vs largeur du sépale")
+    ax.set_xlabel("Longueur du sépale (cm)")
+    ax.set_ylabel("Largeur du sépale (cm)")
+    ax.grid(alpha=0.3)
+    plt.tight_layout()
+    st.pyplot(fig)
+
+# Exercice 4 : Boxplots par espèce
+st.subheader("Exercice 4 : Analyse par espèce (Boxplots)")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("**Longueur du pétale selon l'espèce**")
+    fig, ax = plt.subplots(figsize=(8, 5))
+    df.boxplot(column="petal length (cm)", by="species", ax=ax)
+    ax.set_title("Longueur du pétale selon l'espèce")
+    ax.set_xlabel("Espèce")
+    ax.set_ylabel("Longueur du pétale (cm)")
+    plt.suptitle("")
+    plt.tight_layout()
+    st.pyplot(fig)
+
+with col2:
+    st.markdown("**Largeur du pétale selon l'espèce**")
+    fig, ax = plt.subplots(figsize=(8, 5))
+    df.boxplot(column="petal width (cm)", by="species", ax=ax)
+    ax.set_title("Largeur du pétale selon l'espèce")
+    ax.set_xlabel("Espèce")
+    ax.set_ylabel("Largeur du pétale (cm)")
+    plt.suptitle("")
+    plt.tight_layout()
+    st.pyplot(fig)
+
+# Exercice 5 : Intégration de l'espèce avec matrice de corrélation
+st.subheader("Exercice 5 : Nuage de points par espèce et corrélation")
+
+st.markdown("**Matrice de corrélation des variables quantitatives**")
+correlation = df.drop("species", axis=1).corr()
+st.write(correlation)
+
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.heatmap(correlation, annot=True, cmap="coolwarm", center=0, ax=ax, square=True)
+ax.set_title("Matrice de corrélation des variables Iris")
+plt.tight_layout()
+st.pyplot(fig)
+
+st.markdown("**Nuage de points coloré par espèce**")
+fig, ax = plt.subplots(figsize=(10, 6))
+
+colors = {"setosa": "red", "versicolor": "blue", "virginica": "green"}
+
+for esp in df["species"].unique():
+    sous_df = df[df["species"] == esp]
+    ax.scatter(
+        sous_df["petal length (cm)"],
+        sous_df["petal width (cm)"],
+        label=esp,
+        alpha=0.7,
+        s=100,
+        color=colors[esp]
+    )
+
+ax.set_title("Nuage de points : longueur vs largeur du pétale par espèce")
+ax.set_xlabel("Longueur du pétale (cm)")
+ax.set_ylabel("Largeur du pétale (cm)")
+ax.legend()
+ax.grid(alpha=0.3)
+plt.tight_layout()
+st.pyplot(fig)
 
 
