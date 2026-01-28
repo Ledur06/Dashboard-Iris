@@ -334,8 +334,8 @@ elif page == "📊 Analyses":
     st.title("📊 Analyses et Visualisations")
     st.markdown("---")
     
-    # Effectifs des espèces
-    st.subheader("Exercice 1 : Effectifs des espèces")
+    # Exercice 1 : Effectifs des espèces
+    st.subheader("Effectifs des espèces")
     
     effectifs = df['species'].value_counts()
     
@@ -367,8 +367,8 @@ elif page == "📊 Analyses":
         plt.tight_layout()
         st.pyplot(fig)
     
-    # Variables quantitatives
-    st.subheader("Exercice 2 : Analyse des variables quantitatives")
+    # Exercice 2 : Variables quantitatives
+    st.subheader("Analyse des variables quantitatives")
     
     st.markdown("**Résumé statistique de la longueur du pétale**")
     summary_df = df["petal length (cm)"].describe()
@@ -411,8 +411,8 @@ elif page == "📊 Analyses":
             plt.tight_layout()
             st.pyplot(fig)
     
-    # Étude bivariée
-    st.subheader("Exercice 3 : Étude bivariée")
+    # Exercice 3 : Étude bivariée
+    st.subheader("Étude bivariée")
     
     col1, col2 = st.columns(2)
     
@@ -444,8 +444,8 @@ elif page == "📊 Analyses":
         plt.tight_layout()
         st.pyplot(fig)
     
-    # Boxplots par espèce
-    st.subheader("Exercice 4 : Analyse par espèce (Boxplots)")
+    # Exercice 4 : Boxplots par espèce
+    st.subheader("Analyse par espèce (Boxplots)")
     
     col1, col2 = st.columns(2)
     
@@ -477,8 +477,8 @@ elif page == "📊 Analyses":
         plt.tight_layout()
         st.pyplot(fig)
     
-    # Corrélations et nuage de points par espèce
-    st.subheader("Exercice 5 : Corrélations et nuage de points par espèce")
+    # Exercice 5 : Corrélations et nuage de points par espèce
+    st.subheader("Corrélations et nuage de points par espèce")
     
     st.markdown("**Matrice de corrélation des variables quantitatives**")
     correlation = df.drop("species", axis=1).corr()
