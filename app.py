@@ -152,11 +152,27 @@ st.markdown("""
             background-color: #2a2a2a;
         }
         
-        .stSidebar h1, .stSidebar h2, .stSidebar h3 {
-            color: #00d4ff !important;
+        .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar h4, .stSidebar h5, .stSidebar h6 {
+            color: #ffffff !important;
         }
         
         .stSidebar .stRadio > label {
+            color: #ffffff !important;
+        }
+        
+        .stSidebar .stRadio label span {
+            color: #ffffff !important;
+        }
+        
+        .stSidebar .stMarkdown p, .stSidebar .stMarkdown span, .stSidebar .stMarkdown div {
+            color: #ffffff !important;
+        }
+        
+        .stSidebar .stMarkdown {
+            color: #ffffff !important;
+        }
+        
+        .stSidebar p, .stSidebar span, .stSidebar label, .stSidebar div {
             color: #ffffff !important;
         }
         
