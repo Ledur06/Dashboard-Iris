@@ -74,143 +74,107 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Styles CSS personnalisés pour le thème sombre avec cadres blancs
+# ================================
+# THÈME VISUEL NOIR & BLANC PRO
+# ================================
+
 st.markdown("""
-    <style>
-        /* Thème sombre global */
-        .main {
-            background-color: #1a1a1a;
-        }
-        
-        body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-        }
-        
-        /* Cadres et containers en blanc/clair */
-        .stMetric {
-            background-color: #ffffff;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            border-left: 5px solid #00d4ff;
-        }
-        
-        .stMetric label {
-            color: #1a1a1a !important;
-        }
-        
-        .stMetric .css-1xarl3l {
-            color: #00d4ff !important;
-        }
-        
-        /* Cards pour les sections */
-        .card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-        }
-        
-        /* Boutons stylisés */
-        .stButton > button {
-            background-color: #00d4ff;
-            color: #1a1a1a;
-            font-weight: bold;
-            border-radius: 8px;
-            padding: 12px 40px;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .stButton > button:hover {
-            background-color: #00a8cc;
-            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
-            transform: translateY(-2px);
-        }
-        
-        /* Titres */
-        h1, h2, h3, h4, h5, h6 {
-            color: #ffffff !important;
-            font-weight: bold;
-        }
-        
-        /* Texte général */
-        .stMarkdown, .stText {
-            color: #ffffff !important;
-        }
-        
-        /* Texte sur la partie principale (non sidebar) */
-        .main .stMarkdown, .main .stText, .main p, .main span, .main div {
-            color: #000000 !important;
-        }
-        
-        .main .stMarkdown strong, .main .stMarkdown b {
-            color: #000000 !important;
-        }
-        
-        .main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
-            color: #ffffff !important;
-        }
-        
-        /* Entrées */
-        .stNumberInput label {
-            color: #ffffff !important;
-        }
-        
-        /* Sidebar */
-        .stSidebar {
-            background-color: #2a2a2a;
-        }
-        
-        .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar h4, .stSidebar h5, .stSidebar h6 {
-            color: #ffffff !important;
-        }
-        
-        .stSidebar .stRadio > label {
-            color: #ffffff !important;
-        }
-        
-        .stSidebar .stRadio label span {
-            color: #ffffff !important;
-        }
-        
-        .stSidebar .stMarkdown p, .stSidebar .stMarkdown span, .stSidebar .stMarkdown div {
-            color: #ffffff !important;
-        }
-        
-        .stSidebar .stMarkdown {
-            color: #ffffff !important;
-        }
-        
-        .stSidebar p, .stSidebar span, .stSidebar label, .stSidebar div {
-            color: #ffffff !important;
-        }
-        
-        /* Messages */
-        .stSuccess {
-            background-color: #ffffff !important;
-            color: #1a1a1a !important;
-            border-radius: 8px;
-            padding: 15px;
-            border-left: 5px solid #00ff00;
-        }
-        
-        .stInfo {
-            background-color: #ffffff !important;
-            color: #1a1a1a !important;
-            border-radius: 8px;
-            padding: 15px;
-            border-left: 5px solid #00d4ff;
-        }
-        
-        /* Ligne de séparation */
-        hr {
-            border-color: #444444;
-        }
-    </style>
+<style>
+
+/* -------- BASE -------- */
+html, body, [class*="css"] {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Fond principal */
+.stApp {
+    background-color: #f4f4f4;
+}
+
+/* -------- TEXTE -------- */
+h1, h2, h3, h4, h5, h6 {
+    color: #111111;
+    font-weight: 600;
+}
+
+p, span, label, div {
+    color: #222222;
+    font-size: 15px;
+}
+
+/* -------- CARTES -------- */
+.card {
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+}
+
+/* -------- METRICS -------- */
+[data-testid="metric-container"] {
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border-left: 6px solid #111111;
+}
+
+[data-testid="metric-container"] * {
+    color: #111111 !important;
+}
+
+/* -------- INPUTS -------- */
+input, select {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border-radius: 8px !important;
+}
+
+/* -------- BOUTONS -------- */
+.stButton > button {
+    background-color: #111111;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.25s ease;
+}
+
+.stButton > button:hover {
+    background-color: #000000;
+    transform: translateY(-1px);
+}
+
+/* -------- SIDEBAR -------- */
+section[data-testid="stSidebar"] {
+    background-color: #111111;
+}
+
+section[data-testid="stSidebar"] * {
+    color: #ffffff !important;
+}
+
+/* -------- ALERTES -------- */
+.stSuccess, .stInfo {
+    background-color: #ffffff;
+    color: #111111;
+    border-radius: 12px;
+    padding: 18px;
+    border-left: 6px solid #111111;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* -------- SEPARATEURS -------- */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #dddddd;
+    margin: 32px 0;
+}
+
+</style>
 """, unsafe_allow_html=True)
 
 
