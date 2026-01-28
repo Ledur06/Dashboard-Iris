@@ -70,42 +70,100 @@ accuracy = accuracy_score(y_test, y_pred)
 
 st.set_page_config(
     page_title="Classification des Iris",
-    layout="centered"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
+# Styles CSS personnalisés pour le thème sombre
+st.markdown("""
+    <style>
+        /* Thème sombre personnalisé */
+        .main {
+            background-color: #0e1117;
+        }
+        
+        .stMetric {
+            background-color: #161b22;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #00d4ff;
+        }
+        
+        .stButton > button {
+            background-color: #00d4ff;
+            color: #0e1117;
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 10px 30px;
+        }
+        
+        .stButton > button:hover {
+            background-color: #00b8cc;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #c9d1d9;
+            font-weight: bold;
+        }
+        
+        .stMarkdown {
+            color: #c9d1d9;
+        }
+        
+        .stNumberInput label {
+            color: #c9d1d9;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 st.title("🌸 Application IA – Classification des Iris")
-st.write("Modèle : **K-Nearest Neighbors (KNN)**")
-st.write(f"Exactitude du modèle : **{accuracy*100:.2f}%**")
+
+# Affichage des métriques en haut
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("📊 Modèle utilisé", "K-Nearest Neighbors")
+
+with col2:
+    st.metric("🎯 Exactitude", f"{accuracy*100:.2f}%")
+
+with col3:
+    st.metric("📈 Voisins (K)", "3")
 
 st.markdown("---")
 
-st.subheader("🔢 Entrer les caractéristiques de la fleur")
+st.subheader("🔢 Prédiction - Entrer les caractéristiques de la fleur")
 
-sepal_length = st.number_input(
-    "Longueur du sépale (cm)",
-    min_value=0.0,
-    value=5.1
-)
+col1, col2 = st.columns(2)
 
-sepal_width = st.number_input(
-    "Largeur du sépale (cm)",
-    min_value=0.0,
-    value=3.5
-)
+with col1:
+    sepal_length = st.number_input(
+        "Longueur du sépale (cm)",
+        min_value=0.0,
+        value=5.1
+    )
+    
+    petal_length = st.number_input(
+        "Longueur du pétale (cm)",
+        min_value=0.0,
+        value=1.4
+    )
 
-petal_length = st.number_input(
-    "Longueur du pétale (cm)",
-    min_value=0.0,
-    value=1.4
-)
+with col2:
+    sepal_width = st.number_input(
+        "Largeur du sépale (cm)",
+        min_value=0.0,
+        value=3.5
+    )
+    
+    petal_width = st.number_input(
+        "Largeur du pétale (cm)",
+        min_value=0.0,
+        value=0.2
+    )
 
-petal_width = st.number_input(
-    "Largeur du pétale (cm)",
-    min_value=0.0,
-    value=0.2
-)
-
-if st.button("🔍 Prédire l'espèce"):
+if st.button("🔍 Prédire l'espèce", use_container_width=True):
     input_data = np.array([
         sepal_length,
         sepal_width,
@@ -115,15 +173,21 @@ if st.button("🔍 Prédire l'espèce"):
 
     input_scaled = scaler.transform(input_data)
     prediction = knn.predict(input_scaled)[0]
-
-    st.success(f"🌼 Espèce prédite : **{prediction.upper()}**")
+    
+    # Affichage du résultat avec icônes selon l'espèce
+    emoji_dict = {
+        "setosa": "🌹",
+        "versicolor": "🌺",
+        "virginica": "🌻"
+    }
+    
+    emoji = emoji_dict.get(prediction, "🌸")
+    
+    st.success(f"{emoji} Espèce prédite : **{prediction.upper()}**", icon="✅")
 
 st.markdown("---")
 
-st.caption(
-    "Application développée dans le cadre du TP de classification "
-    "des fleurs Iris – Apprentissage automatique."
-)
+st.info("📚 **Section Analyses et Visualisations** - Explorez les données détaillées ci-dessous", icon="ℹ️")
 
 # ================================
 # VISUALISATIONS ET ANALYSES
@@ -284,5 +348,15 @@ ax.legend()
 ax.grid(alpha=0.3)
 plt.tight_layout()
 st.pyplot(fig)
+
+# ================================
+# PIED DE PAGE
+# ================================
+
+st.markdown("---")
+st.caption(
+    "🚀 Application développée dans le cadre du TP de classification "
+    "des fleurs Iris – Apprentissage automatique."
+)
 
 
