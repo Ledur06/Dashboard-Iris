@@ -142,6 +142,19 @@ st.markdown("""
             color: #ffffff !important;
         }
         
+        /* Texte sur la partie principale (non sidebar) */
+        .main .stMarkdown, .main .stText, .main p, .main span, .main div {
+            color: #000000 !important;
+        }
+        
+        .main .stMarkdown strong, .main .stMarkdown b {
+            color: #000000 !important;
+        }
+        
+        .main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
+            color: #ffffff !important;
+        }
+        
         /* Entrées */
         .stNumberInput label {
             color: #ffffff !important;
